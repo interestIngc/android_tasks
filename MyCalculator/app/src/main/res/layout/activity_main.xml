@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/outputField"
+            android:layout_width= "0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textIsSelectable="true"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/inputField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textIsSelectable="true"
+        android:inputType="phone"
+        android:autofillHints=""
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onDelete"
+        android:text="@string/c" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp">
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickNumber"
+            android:text="@string/_7"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickNumber"
+            android:text="@string/_8"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickNumber"
+            android:text="@string/_9"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onOperationClick"
+            android:text="@string/op_divide"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickNumber"
+            android:text="@string/_4"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickNumber"
+            android:text="@string/_5"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickNumber"
+            android:text="@string/_6"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onOperationClick"
+            android:text="@string/op_mul"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickNumber"
+            android:text="@string/_1"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickNumber"
+            android:text="@string/_2"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickNumber"
+            android:text="@string/_3"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onOperationClick"
+            android:text="@string/op_subtract"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickNumber"
+            android:text="@string/_0"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickNumber"
+            android:text="@string/dot"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onOperationClick"
+            android:text="@string/eqls"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onOperationClick"
+            android:text="@string/op_add"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+</LinearLayout>
