@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="day1">Mon </string>
+    <string name="day2">Tue </string>
+    <string name="day3">Wed </string>
+    <string name="day4" >Thu </string>
+    <string name="day5" >Fri </string>
+    <string name="weather1" >23 C</string>
+    <string name="weather2" >25 C</string>
+    <string name="weather3" >26 C</string>
+    <string name="weather4" >24 C</string>
+    <string name="weather5" >23 C</string>
+    <string name="_32_c">32 C</string>
+    <string name="toronto_us">Toronto, US</string>
+    <string name="rain">rain</string>
+    <string name="cloudy_and_sunny">cloudy and sunny</string>
+    <string name="sunny">sunny</string>
+    <string name="weather">Weather</string>
+
+</resources>
