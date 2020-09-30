@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="numberOfContacts">
+        <item quantity="one">Доступен %d контакт</item>
+        <item quantity="few">Доступно %d контакта</item>
+        <item quantity="other">Доступно %d контактов</item>
+    </plurals>
+</resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,43 +35,62 @@
         android:onClick="onDelete"
         android:text="@string/c" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp">
+        android:layout_marginTop="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/button2">
 
         <Button
-            android:layout_width="20dp"
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:onClick="clickNumber"
             android:text="@string/_7"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_conversion_absoluteWidth="98dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="120dp" />
 
         <Button
-            android:layout_width="20dp"
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:onClick="clickNumber"
             android:text="@string/_8"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_conversion_absoluteWidth="98dp"
+            tools:layout_editor_absoluteX="98dp"
+            tools:layout_editor_absoluteY="120dp" />
 
         <Button
-            android:layout_width="20dp"
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:onClick="clickNumber"
             android:text="@string/_9"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_conversion_absoluteWidth="98dp"
+            tools:layout_editor_absoluteX="196dp"
+            tools:layout_editor_absoluteY="120dp" />
 
         <Button
-            android:layout_width="20dp"
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:onClick="onOperationClick"
             android:text="@string/op_divide"
-            tools:ignore="ButtonStyle" />
-    </LinearLayout>
+            tools:ignore="ButtonStyle"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_conversion_absoluteWidth="98dp"
+            tools:layout_editor_absoluteX="295dp"
+            tools:layout_editor_absoluteY="120dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
