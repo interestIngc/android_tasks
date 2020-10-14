@@ -18,7 +18,7 @@ import java.io.IOException
 class MainActivity : AppCompatActivity() {
     companion object {
         const val key = "09a9cfc90ace7036c83b7ef2ff4da5c940f28befd1c5bcc6560d6143bb40385a963565893ab44a3da97f8"
-        const val query = "nature"
+        const val query = "memes"
         const val count = 100
     }
 
@@ -27,14 +27,13 @@ class MainActivity : AppCompatActivity() {
     internal fun display_preview_images(result : List<Image>) {
         imageList = result
         val viewManager = LinearLayoutManager(this@MainActivity)
-        val curr_adapter = ImageAdapter(result) {
-            val intent = Intent(this@MainActivity, ImageActivity::class.java)
-            intent.putExtra("url", it.url)
-            startActivity(intent)
-        }
         recycler_view.apply {
             layoutManager = viewManager
-            adapter = curr_adapter
+            adapter = ImageAdapter(result) {
+                val intent = Intent(this@MainActivity, ImageActivity::class.java)
+                intent.putExtra("url", it.url)
+                startActivity(intent)
+            }
         }
     }
 
@@ -42,13 +41,12 @@ class MainActivity : AppCompatActivity() {
 
         private val refer = WeakReference(activity)
 
-        override fun doInBackground(vararg params: String?): List<Image> {
+        override fun doInBackground(vararg params : String): List<Image>? {
             val image_list = mutableListOf<Image>()
-            val string_url = "https://api.vk.com/method/photos.search?q=${params[0]}&access_token=${params[1]}&v=5.102&count=${count}"
+            val string_url = "https://api.vk.com/method/photos.search?q=${query}&access_token=${key}&v=5.102&count=${count}"
             try {
                 InputStreamReader(URL(string_url).openConnection().getInputStream()).use {
-                    val parser = JSONParser()
-                    val root = parser.parse(it.readText()) as org.json.simple.JSONObject
+                    val root = JSONParser().parse(it.readText()) as org.json.simple.JSONObject
                     val response = root["response"] as org.json.simple.JSONObject
                     val results = response["items"] as org.json.simple.JSONArray
                     for (result in results) {
@@ -81,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (imageList == null) {
-            GetImagesPreview(this@MainActivity).execute(query, key)
+            GetImagesPreview(this@MainActivity).execute()
         }
     }
 }
