@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             outputField.setText(calc_expression.toString())
             inputField.setText("")
         } else {
-            inputField.append(" $op ")
+            inputField.append(" " + op + " ")
         }
         operation = op
     }
