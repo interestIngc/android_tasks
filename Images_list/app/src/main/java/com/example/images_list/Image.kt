@@ -1,3 +1,7 @@
 package com.example.images_list
 
-data class Image(val description: String?, val url: String?)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Image(val description: String?, val url: String?) : Parcelable

@@ -33,6 +33,7 @@ class ImageActivity : AppCompatActivity() {
         val service_intent = Intent(this@ImageActivity, MyService::class.java).
         putExtra("url", url)
         startService(service_intent)
+
         broadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(p0: Context?, intent: Intent?) {
                 Log.i("receiving", "")

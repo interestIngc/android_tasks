@@ -68,6 +68,7 @@ class MyService : Service() {
             }
         } else {
             if (curUrl != null) {
+                Log.i("download on url : ", "${curUrl}")
                 LoadOneImage(this@MyService).execute(curUrl)
             }
         }

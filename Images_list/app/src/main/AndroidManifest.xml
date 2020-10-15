@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.images_list">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -16,8 +17,7 @@
             android:name=".MyService"
             android:enabled="true"
             android:exported="true"
-            tools:ignore="Instantiatable">
-        </service>
+            tools:ignore="Instantiatable" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -26,8 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ImageActivity">
-        </activity>
+        <activity android:name=".ImageActivity"></activity>
     </application>
 
 </manifest>

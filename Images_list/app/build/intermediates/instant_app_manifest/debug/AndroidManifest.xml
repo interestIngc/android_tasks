@@ -25,8 +25,7 @@
         <service
             android:name="com.example.images_list.MyService"
             android:enabled="true"
-            android:exported="true" >
-        </service>
+            android:exported="true" />
 
         <activity android:name="com.example.images_list.MainActivity" >
             <intent-filter>
@@ -35,8 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.images_list.ImageActivity" >
-        </activity>
+        <activity android:name="com.example.images_list.ImageActivity" />
     </application>
 
 </manifest>
