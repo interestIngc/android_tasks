@@ -12,6 +12,8 @@ import com.example.navigation.navigate
 
 class NotificationsFragment : Fragment() {
     private var notsNumber : Int = 0
+    private var notsNumberStr : String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,10 +25,13 @@ class NotificationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         notsNumber = NotificationsFragmentArgs.fromBundle(requireArguments()).number
-        view.findViewById<TextView>(R.id.notsNumber).text = notsNumber.toString()
+        notsNumberStr = NotificationsFragmentArgs.fromBundle(requireArguments()).numberStr
+        view.findViewById<TextView>(R.id.notsNumber).text = notsNumberStr
         val bn = view.findViewById<Button>(R.id.nots_button) as Button
         bn.setOnClickListener {
-            navigate(NotificationsFragmentDirections.actionNotificationsFragmentSelf(notsNumber + 1))
+            val currNum = notsNumber + 1
+            val currStr = "$notsNumberStr->${currNum}"
+            navigate(NotificationsFragmentDirections.actionNotificationsFragmentSelf(currNum, currStr))
         }
     }
 }

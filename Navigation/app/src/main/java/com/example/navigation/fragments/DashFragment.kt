@@ -13,28 +13,26 @@ import com.example.navigation.navigate
 
 class DashFragment : Fragment() {
     private var dashNumber : Int = 0
+    private var dashNumberStr : String = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
-        val view = inflater.inflate(R.layout.fragment_dash, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_dash, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dashNumber = DashFragmentArgs.fromBundle(requireArguments()).number
-        view.findViewById<TextView>(R.id.dashNumber).text = dashNumber.toString()
+        dashNumberStr = DashFragmentArgs.fromBundle(requireArguments()).numberStr
+        view.findViewById<TextView>(R.id.dashNumber).text = dashNumberStr
         val bn = view.findViewById<Button>(R.id.dash_button) as Button
         bn.setOnClickListener {
-            navigate(DashFragmentDirections.actionDashFragmentSelf(dashNumber + 1))
+            val currNum = dashNumber + 1
+            val currStr = "$dashNumberStr->$currNum"
+            navigate(DashFragmentDirections.actionDashFragmentSelf(currNum, currStr))
         }
     }
 
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//        outState.putInt("dashNumber", dashNumber)
-//    }
 }

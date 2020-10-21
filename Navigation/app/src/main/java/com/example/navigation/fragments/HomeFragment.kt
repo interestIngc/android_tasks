@@ -12,6 +12,7 @@ import com.example.navigation.navigate
 
 class HomeFragment : Fragment() {
     private var homeNumber : Int = 0
+    private var homeNumberStr : String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,10 +25,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         homeNumber = HomeFragmentArgs.fromBundle(requireArguments()).number
-        view.findViewById<TextView>(R.id.home_number).text = homeNumber.toString()
+        homeNumberStr = HomeFragmentArgs.fromBundle(requireArguments()).numberStr
+        view.findViewById<TextView>(R.id.home_number).text = homeNumberStr
         val bn = view.findViewById<Button>(R.id.home_button) as Button
         bn.setOnClickListener {
-            navigate(HomeFragmentDirections.actionHomeFragmentSelf(homeNumber + 1))
+            val currNum = homeNumber + 1
+            val currStr = "$homeNumberStr->${currNum}"
+            navigate(HomeFragmentDirections.actionHomeFragmentSelf(currNum, currStr))
         }
     }
 }

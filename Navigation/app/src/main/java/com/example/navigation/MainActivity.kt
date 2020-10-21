@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
     private var current_nav_controller : LiveData<NavController>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.i("onCreate", "created")
         super.onCreate(savedInstanceState)
         supportActionBar?.apply {
             setDisplayShowHomeEnabled(true)
@@ -36,7 +35,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpBottomNavigation() {
-        Log.i("setUp", "navig")
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val navGraphIds = listOf(R.navigation.home,
             R.navigation.dash,
