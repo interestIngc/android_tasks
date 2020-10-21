@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashNavigation"
+    app:startDestination="@id/dashFragment">
+    <fragment
+        android:id="@+id/dashFragment"
+        android:name="com.example.navigation.fragments.DashFragment"
+        android:label="DashFragment"
+        tools:layout="@layout/fragment_dash">
+        <action
+            android:id="@+id/action_dashFragment_self"
+            app:destination="@id/dashFragment" />
+        <argument
+            android:name="number"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
+    </fragment>
+</navigation>

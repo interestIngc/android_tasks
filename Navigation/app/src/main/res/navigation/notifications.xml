@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notificationsNavigation"
+    app:startDestination="@id/notificationsFragment">
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.navigation.fragments.NotificationsFragment"
+        android:label="NotificationsFragment"
+        tools:layout="@layout/fragment_notifications">
+        <action
+            android:id="@+id/action_notificationsFragment_self"
+            app:destination="@id/notificationsFragment" />
+        <argument
+            android:name="number"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
+    </fragment>
+</navigation>
