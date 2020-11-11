@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="OwnDrawLoadingView">
+        <attr name="centerxVert" format="float" />
+        <attr name="centeryVert" format="float" />
+        <attr name="radius" format="float" />
+        <attr name="width" format="float" />
+        <attr name="count" format="integer" />
+        <attr name="centerXHorizontal" format="float" />
+        <attr name="centerYHorizontal" format="float" />
+
+    </declare-styleable>
+</resources>
