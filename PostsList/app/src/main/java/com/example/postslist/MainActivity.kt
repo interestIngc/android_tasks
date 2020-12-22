@@ -2,7 +2,10 @@ package com.example.postslist
 
 import android.app.Activity
 import android.app.Notification
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,8 +29,7 @@ import java.util.concurrent.Callable
 val request_access_type = 10
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-    }
+
     private var call : Call<List<Post>>? = null
 
     private lateinit var add : Button
@@ -38,15 +40,53 @@ class MainActivity : AppCompatActivity() {
 
     private var resp : Call<Post>? = null
 
-    private var currId : Long = 101
+    private var currId : Long = 150
+
+    var broadcastReceiver : BroadcastReceiver? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         add = findViewById<Button>(R.id.button)
+        broadcastReceiver = object: BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                val operation = intent?.getStringExtra("operation")
+                if (operation == "post") {
+                    val message = intent.getIntExtra("message", 0)
+                    val post = intent.getParcelableExtra<Post>("post")
+                    if (message == 0) {
+                        Toast.makeText(this@MainActivity, "can't connect to the API", Toast.LENGTH_LONG)
+                            .show()
+                    } else {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "$post \nPosting was successful!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                    sendData(post)
+                } else if (operation == "delete") {
+                    val text = intent.getStringExtra("text")
+                    Log.i("text", "${text.isNullOrEmpty()}")
+                    Toast.makeText(this@MainActivity, text, Toast.LENGTH_LONG).show()
+                } else if (operation == "run") {
+                    val executed = intent.getBooleanExtra("has_list", false)
+                    if (!executed) {
+                        Toast.makeText(this@MainActivity, "can't connect with the API", Toast.LENGTH_LONG).show()
+                    } else {
+                        list = intent.getParcelableArrayListExtra("list")
+                        displayPosts(list)
+                    }
+                }
+            }
+            
+        }
+        registerReceiver(broadcastReceiver, IntentFilter("response").apply {
+            addCategory(Intent.CATEGORY_DEFAULT)
+        })
         if (savedInstanceState == null) {
-            run()
+            makeRun()
         } else {
             list = savedInstanceState.getParcelableArrayList("list")
             displayPosts(list)
@@ -56,47 +96,18 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, request_access_type)
         }
         reload.setOnClickListener {
-            run()
+            makeRun()
         }
     }
 
-    private fun post(title : String, body : String) : Post? {
-        resp = MyApp.instance.myApi.doPost(title, body, 1)
-        var currPost : Post? = null
-        resp?.enqueue(object : Callback<Post> {
-            override fun onFailure(call: Call<Post>, t: Throwable) {
-                Log.i("post", "error while posting occured", t)
-            }
-            override fun onResponse(call: Call<Post>, response: Response<Post>) {
-                Log.i("response", "${response.body()}")
-                if (response.isSuccessful) {
-                    currPost = response.body()
-                    currId++
-                    sendData(response.body())
-                    Toast.makeText(
-                        this@MainActivity,
-                        "${response.body()} \nPosting was successful!",
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    Toast.makeText(this@MainActivity, "can't connect to the API", Toast.LENGTH_LONG).show()
-                }
-            }
-        })
-        return currPost
-    }
+
 
     private fun makePost(title: String, body: String) {
-        var post = post(title, body)
-        val postDao = MyApp.instance.myDb.postDAO()
-        if (post == null) {
-            post = Post(1, currId, title, body)
-            sendData(post)
-            currId++
-        }
-        Thread {
-            postDao.insert(post)
-        }.start()
+        val service_intent = Intent(this@MainActivity, MyService::class.java)
+        service_intent.putExtra("operation", "post")
+        service_intent.putExtra("title", title)
+        service_intent.putExtra("body", body)
+        startService(service_intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -119,46 +130,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun run() {
-        call = MyApp.instance.myApi.get()
-        call?.enqueue(object : Callback<List<Post>> {
-            override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
-                if (response.isSuccessful) {
-                    val body = response.body()
-                    list = body as MutableList<Post>
-                    displayPosts(list)
-                } else {
-                    Toast.makeText(this@MainActivity, "can't connect with API, sorry", Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<List<Post>>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "connection error occured, sorry", Toast.LENGTH_LONG).show()
-            }
-        }
-        )
+    private fun makeRun() {
+        val intent_service = Intent(this@MainActivity, MyService::class.java)
+        intent_service.putExtra("operation", "run")
+        startService(intent_service)
     }
 
-    private fun delete(post : Post) {
-        if (post.id == null) {
-            return
-        }
-        val resp = MyApp.instance.myApi.delete(post.id)
-        Toast.makeText(this@MainActivity, "$resp", Toast.LENGTH_LONG).show()
-    }
 
     private fun makeDelete(post: Post) {
-        delete(post)
-        val postDao = MyApp.instance.myDb.postDAO()
-//        Completable.fromAction(object : Action {
-//            override fun run() {
-//                postDao.deleteFromDao(post)
-//            }
-//        }).subscribe()
-        Thread {
-            postDao.deleteFromDao(post)
-        }.start()
+        val service_intent = Intent(this@MainActivity, MyService::class.java)
+        service_intent.putExtra("operation", "delete")
+        service_intent.putExtra("post", post)
+        startService(service_intent)
     }
 
 
@@ -185,5 +168,10 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         list = savedInstanceState.getParcelableArrayList("list")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(broadcastReceiver)
     }
 }

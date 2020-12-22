@@ -20,6 +20,4 @@ class MyApp : Application() {
         myDb = Room.databaseBuilder(this, PostDatabase::class.java, "database").build()
         instance = this
     }
-
-
 }

@@ -4,6 +4,9 @@ import androidx.room.*
 
 @Dao
 interface MyDao {
+
+
+
     @Insert
     fun insert(post : Post)
 
